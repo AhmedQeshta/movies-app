@@ -32,8 +32,18 @@ yarn-error.*
 
 # local env files
 .env*.local
+.env
 
 # typescript
 *.tsbuildinfo
 
 app-example
+
+
+.vscode
+
+yarn.lock
+
+
+
+package-lock.json
