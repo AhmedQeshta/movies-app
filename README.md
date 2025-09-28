@@ -1,50 +1,282 @@
-# Welcome to your Expo app 👋
+# 🎬 Movie Explorer
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern React Native movie discovery app built with Expo, featuring TMDB API integration, beautiful UI, and smooth navigation.
 
-## Get started
+## ✨ Features
 
-1. Install dependencies
+### 🎭 Movie Discovery
+
+- **Popular Movies**: Trending movies with horizontal scrolling
+- **Now Playing**: Currently in theaters
+- **Top Rated**: Highest rated movies of all time
+- **Coming Soon**: Upcoming releases
+- **Movie Details**: Comprehensive movie information with cast, crew, and details
+
+### 🎨 User Experience
+
+- **Modern UI**: Dark gradient theme with beautiful movie cards
+- **Smooth Navigation**: Modal-based movie details with gesture support
+- **Responsive Design**: Optimized for all screen sizes
+- **Loading States**: Elegant loading animations and error handling
+- **Splash Screen**: Professional app launch experience
+
+### 🔐 Authentication
+
+- **Clerk Integration**: Secure user authentication
+- **Google Sign-In**: Easy social login
+- **Profile Management**: User profiles with settings
+
+### 📱 Technical Features
+
+- **TypeScript**: Full type safety throughout the app
+- **React Query**: Efficient data fetching and caching
+- **Expo Router**: File-based navigation system
+- **Safe Area**: Proper handling of device notches and status bars
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+- Expo CLI
+- TMDB API key (free)
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone <repository-url>
+   cd movies-app
+   ```
+
+2. **Install dependencies**
 
    ```bash
    npm install
+   # or
+   yarn install
    ```
 
-2. Start the app
+3. **Set up environment variables**
+   Create a `.env` file in the root directory:
+
+   ```env
+   EXPO_PUBLIC_TMDB_API_KEY=your_tmdb_api_key_here
+   EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_key_here
+   ```
+
+4. **Get TMDB API Key**
+
+   - Visit [The Movie Database (TMDB)](https://www.themoviedb.org/)
+   - Sign up for a free account
+   - Go to Settings → API → Create API Key
+   - Copy your API key to the `.env` file
+
+5. **Start the development server**
 
    ```bash
-   npx expo start
+   npm start
+   # or
+   yarn start
    ```
 
-In the output, you'll find options to open the app in a
+6. **Run on device/simulator**
+   - Press `i` for iOS simulator
+   - Press `a` for Android emulator
+   - Scan QR code with Expo Go app
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🏗️ Project Structure
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+movies-app/
+├── app/                          # Expo Router pages
+│   ├── (app)/                    # Authenticated app routes
+│   │   ├── (tabs)/              # Tab navigation
+│   │   │   ├── index.tsx        # Home page
+│   │   │   └── profile/         # Profile page
+│   │   └── movie/               # Movie details
+│   │       └── [id].tsx         # Dynamic movie page
+│   └── _layout.tsx              # Root layout
+├── components/                   # Reusable components
+│   ├── movies/                  # Movie-related components
+│   │   ├── Movies.tsx          # Main movies component
+│   │   ├── MovieCard.tsx       # Individual movie card
+│   │   └── MovieSection.tsx    # Movie category sections
+│   └── SplashScreen.tsx        # App splash screen
+├── hooks/                       # Custom React hooks
+│   ├── data/                   # Data fetching hooks
+│   │   ├── usePopularMovies.ts
+│   │   ├── useTopRatedMovies.ts
+│   │   ├── useNowPlayingMovies.ts
+│   │   └── useUpcomingMovies.ts
+│   └── useFetchData.ts         # Generic data fetching hook
+├── libs/                        # API and utilities
+│   └── data/
+│       └── movies.ts           # TMDB API functions
+├── types/                       # TypeScript type definitions
+│   ├── movie.ts                # Movie-related types
+│   └── data.ts                 # Data fetching types
+└── constants/
+    ├── Colors.ts               # App color scheme
+    └── Api.ts                  # API configuration
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🎯 Key Components
 
-## Learn more
+### MovieCard
 
-To learn more about developing your project with Expo, look at the following resources:
+- Displays movie poster, title, rating, and year
+- Handles navigation to movie details
+- Responsive design with proper aspect ratios
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### MovieSection
 
-## Join the community
+- Reusable component for different movie categories
+- Supports both horizontal and grid layouts
+- Includes loading states and error handling
 
-Join our community of developers creating universal apps.
+### Movie Details Modal
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Full-screen movie information
+- Backdrop images and movie posters
+- Cast and crew information
+- Movie statistics and details
+
+## 🔧 API Integration
+
+### TMDB API Endpoints Used
+
+- `/movie/popular` - Popular movies
+- `/movie/top_rated` - Top rated movies
+- `/movie/now_playing` - Currently playing
+- `/movie/upcoming` - Upcoming releases
+- `/movie/{id}` - Movie details
+- `/movie/{id}/credits` - Cast and crew
+
+### Data Caching
+
+- React Query for efficient data fetching
+- 5-minute stale time for movie data
+- Automatic background refetching
+- Error handling and retry logic
+
+## 🎨 Design System
+
+### Colors
+
+- **Primary**: Dark blue gradient (`#1a1a2e` to `#16213e`)
+- **Accent**: Purple (`#6849a7`)
+- **Text**: White and light gray for contrast
+- **Status Bar**: Light content on dark background
+
+### Typography
+
+- **Headers**: Bold, large text for titles
+- **Body**: Readable font sizes with proper line height
+- **Captions**: Smaller text for metadata
+
+### Layout
+
+- **Safe Areas**: Proper handling of device notches
+- **Responsive**: Adapts to different screen sizes
+- **Spacing**: Consistent padding and margins
+
+## 📱 Navigation
+
+### Tab Navigation
+
+- **Home**: Movie discovery and browsing
+- **Profile**: User settings and authentication
+
+### Modal Navigation
+
+- **Movie Details**: Full-screen movie information
+- **Gesture Support**: Swipe to dismiss modals
+
+## 🔐 Authentication
+
+### Clerk Integration
+
+- Secure user authentication
+- Social login with Google
+- Session management
+- Protected routes
+
+### User Features
+
+- Profile management
+- Settings and preferences
+- Sign out functionality
+
+## 🚀 Deployment
+
+### Development
+
+```bash
+npm start
+```
+
+### Production Build
+
+```bash
+# iOS
+npx expo build:ios
+
+# Android
+npx expo build:android
+```
+
+### App Store Deployment
+
+1. Configure app.json with proper bundle identifiers
+2. Build production version
+3. Submit to respective app stores
+
+## 🛠️ Development
+
+### Code Style
+
+- TypeScript for type safety
+- ESLint for code quality
+- Consistent naming conventions
+- Component-based architecture
+
+### Performance
+
+- Image optimization
+- Lazy loading
+- Efficient data fetching
+- Smooth animations
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📞 Support
+
+For support and questions:
+
+- Create an issue in the repository
+- Check the documentation
+- Review the code comments
+
+## 🙏 Acknowledgments
+
+- [The Movie Database (TMDB)](https://www.themoviedb.org/) for the amazing API
+- [Expo](https://expo.dev/) for the development platform
+- [Clerk](https://clerk.dev/) for authentication
+- [React Query](https://tanstack.com/query) for data fetching
+
+---
+
+**Made with ❤️ for movie lovers everywhere**

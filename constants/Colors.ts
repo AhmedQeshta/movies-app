@@ -9,6 +9,7 @@ const tintColorDark = '#fff';
 export const Colors = {
   primary: '#6849a7',
   warning: '#cc475a',
+  primaryGoogle: '#cc475a',
   textPrimary: '#fff',
   textWarning: '#fff',
   light: {
